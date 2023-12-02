@@ -17,8 +17,12 @@ def list_documents():
 
 @app.route('/load_vectorstore', methods=['POST'])
 def load_vectorstore():
-    document_name = request.form['document_name']
-    collection_name = 'LG_DRYER_DEMO'
+    directory = 'sample_sources/pdf'
+    files = [f for f in os.listdir(directory) if f.endswith('.pdf')]
+    if not files:
+        return jsonify({'error': 'No documents found'}), 404
+    document_name = files[0]  # Pick the first document for the demo
+    collection_name = 'LG_DRYER_DEMO'  # Lock the collection name
     result = load_chromadb(document_name, collection_name)
     return jsonify(result)
 
