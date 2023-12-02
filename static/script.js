@@ -66,7 +66,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const chatInterface = document.getElementById('chat-interface');
         const message = document.createElement('div');
         message.classList.add('chat-message', 'system-message');
-        message.textContent = "Assistant: " + text;
+        // Format the text to display special characters properly
+        const formattedText = text
+            .replace(/\n/g, '<br>')
+            .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'); // Replace each tab with 4 non-breaking spaces
+        message.innerHTML = "Assistant: " + formattedText; // Use innerHTML to parse the HTML tags
         chatInterface.appendChild(message);
         chatInterface.scrollTop = chatInterface.scrollHeight; // Scroll to the bottom
     }
