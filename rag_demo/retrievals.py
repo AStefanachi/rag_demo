@@ -5,7 +5,7 @@
 from .prompt_templates import rag_prompt_custom  # Custom prompt templates for RAG
 from .retrieval_from_chromadb import run_qa_chromadb  # Function to run QA on ChromaDB
 
-def query_LG_DRYER_DEMO(prompt: str) -> str:
+def query_LG_DRYER_DEMO(prompt: str, collection_name: str) -> str:
     """
     Queries the LG_DRYER_DEMO collection from the vectorstore and returns the context.
 
@@ -15,4 +15,4 @@ def query_LG_DRYER_DEMO(prompt: str) -> str:
     Returns:
         str: The retrieved context from the vectorstore.
     """
-    return run_qa_chromadb(question=prompt, collection_name="LG_DRYER_DEMO", template=rag_prompt_custom)
+    return run_qa_chromadb(question=prompt, collection_name=collection_name, template=rag_prompt_custom)

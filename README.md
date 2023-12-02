@@ -4,7 +4,7 @@ This application demonstrates the capabilities of a Retrieval-Augmented Generati
 
 ## Author
 
-Andrea Stefanachi <andreai@stefanachi.com>
+Andrea Stefanachi <andrea@stefanachi.com>
 
 ## Installation
 

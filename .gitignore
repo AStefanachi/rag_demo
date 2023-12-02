@@ -1,3 +1,4 @@
 .aider*
 sample_sources/pdf
 cromadb
+settings.env
