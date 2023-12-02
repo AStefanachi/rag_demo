@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, jsonify
 from rag_demo.orchestration import load_chromadb
 from rag_demo.retrievals import query_LG_DRYER_DEMO
@@ -8,10 +9,16 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/list_documents', methods=['GET'])
+def list_documents():
+    directory = 'sample_sources/pdf'
+    files = [f for f in os.listdir(directory) if f.endswith('.pdf')]
+    return jsonify(files)
+
 @app.route('/load_vectorstore', methods=['POST'])
 def load_vectorstore():
     document_name = request.form['document_name']
-    collection_name = request.form['collection_name']
+    collection_name = 'LG_DRYER_DEMO'
     result = load_chromadb(document_name, collection_name)
     return jsonify(result)
 
