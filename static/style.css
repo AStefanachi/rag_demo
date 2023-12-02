@@ -72,6 +72,7 @@ button:hover {
     margin-bottom: 10px;
     border-radius: 8px;
     max-width: 80%;
+    word-wrap: break-word; /* Allows long words to break and wrap to the next line */
 }
 
 .user-message {
