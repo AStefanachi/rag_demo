@@ -19,6 +19,8 @@ OPENAI_API_KEY=YOUROPENAIAPIKEY
 
 Additionally, create a folder to store your ChromaDB persistent client data.
 
+Note: The `OPENAI_API_KEY` is not free and can be obtained from [OpenAI's website](https://openai.com/blog/openai-api).
+
 To install the necessary dependencies for this application, run the following command:
 
 ```bash
