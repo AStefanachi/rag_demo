@@ -1,75 +1,75 @@
 # /rag_demo/retrieval_from_chromadb.py
-## Langchain
-# Chat Models
+"""
+retrieval_from_chromadb.py
+
+This module provides functionality to retrieve context from a ChromaDB vector store
+based on a given question and collection name, and then generate an answer using a
+language model.
+"""
+
+# Langchain imports
 from langchain.chat_models import ChatOpenAI
-# Schemas
 from langchain.schema.runnable import RunnablePassthrough
-# Chains
 from langchain.chains import LLMChain, HypotheticalDocumentEmbedder
-# Prompts
-from langchain.prompts import PromptTemplate
-# Vector Store: Chroma
 from langchain.vectorstores import Chroma
-# Embeddings
 from langchain.embeddings.sentence_transformer import SentenceTransformerEmbeddings
-## LLM
+
+# Local imports
 from .prompt_templates import hyde_custom_prompt
-## Python Core
+
+# Core Python and third-party imports
 import chromadb
 from dotenv import load_dotenv
 import os
-## Utils
+
+# Utility imports
 from utils.constants import CHROMA_PERSISTANT_DIR
 
 
-def run_qa_chromadb(question: str, collection_name:str, template: object):
-    '''Returns a context, from querying the vector store, according to question and collection_name'''
+def run_qa_chromadb(question: str, collection_name: str, template: object) -> str:
+    """
+    Retrieves context from a ChromaDB vector store and generates an answer to a question.
 
-    # Loading environment settings
+    Args:
+        question (str): The question to be answered.
+        collection_name (str): The name of the collection in the vector store to query.
+        template (object): The template object to format the question for the language model.
+
+    Returns:
+        str: The generated answer to the question.
+    """
+
+    # Load environment settings
     load_dotenv("settings.env")
 
-    # create the open-source embedding function
+    # Create the embedding function using a pre-trained model
     embedding_function = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
 
-    # Perform Hypotetical Document Embedding   
-    # Pre-generate an answer    
+    # Initialize the language model with a custom prompt
     llm_hyde = ChatOpenAI(model_name=os.environ.get('LLM_MODEL'), temperature=0)
-
     llm_chain = LLMChain(llm=llm_hyde, prompt=hyde_custom_prompt)
 
-    # Embed the answer
-    embeddings = HypotheticalDocumentEmbedder(
-                    llm_chain=llm_chain, base_embeddings=embedding_function
-                )
+    # Embed the hypothetical answer
+    embeddings = HypotheticalDocumentEmbedder(llm_chain=llm_chain, base_embeddings=embedding_function)
 
-    # Instantiate vectorstore client
+    # Instantiate the vector store client
     client = chromadb.PersistentClient(path=CHROMA_PERSISTANT_DIR)
 
-    # Assign the Hypothetical embeddings to the Vector store to enhance similarity
-    db = Chroma(
-        client=client,
-        collection_name=collection_name,
-        embedding_function=embeddings,
-    )
+    # Create the Chroma vector store with the hypothetical embeddings
+    db = Chroma(client=client, collection_name=collection_name, embedding_function=embeddings)
 
-    # Fetch the first 5 documents out of the Max Marginal Relevance Search
-    # Keep a lambda mult (value from 0 to 1)  that determines 
-    # the degree of diversity among the results: 0 min, 1 max
-    retriever = db.as_retriever(
-                                    search_type="mmr",
-                                    search_kwargs={'k': 5, 'lambda_mult': 0.5}
-                                )
+    # Configure the retriever for Max Marginal Relevance Search with diversity
+    retriever = db.as_retriever(search_type="mmr", search_kwargs={'k': 5, 'lambda_mult': 0.5})
 
-    # Fetch the context
+    # Retrieve the most relevant documents based on the question
     context = retriever.get_relevant_documents(question)
 
+    # Initialize the language model for generating the answer
     llm = ChatOpenAI(model_name=os.environ.get('LLM_MODEL'), temperature=0)
 
-    # Instantiate the chain, containing the context, the question, templates and the llm
-    rag_chain = (
-                    {"context": retriever, "question": RunnablePassthrough()} | template | llm
-                )
+    # Create the chain with the context, question, template, and language model
+    rag_chain = ({"context": retriever, "question": RunnablePassthrough()} | template | llm)
 
-    # return the output
+    # Generate and return the answer
     return rag_chain.invoke(question).content
     
