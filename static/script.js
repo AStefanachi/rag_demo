@@ -45,7 +45,12 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            document.getElementById('response').textContent = JSON.stringify(data);
+            const chatInterface = document.getElementById('chat-interface');
+            const message = document.createElement('div');
+            message.classList.add('chat-message', 'system-message');
+            message.textContent = JSON.stringify(data, null, 2);
+            chatInterface.appendChild(message);
+            chatInterface.scrollTop = chatInterface.scrollHeight; // Scroll to the bottom
         });
     });
 });
