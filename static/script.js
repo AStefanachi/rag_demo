@@ -66,9 +66,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const chatInterface = document.getElementById('chat-interface');
         const message = document.createElement('div');
         message.classList.add('chat-message', 'system-message');
-        // Format the text to display special characters properly as HTML
+        // Format the text to display special characters properly as HTML, including double newlines
         const formattedText = text
-            .replace(/\n/g, '<br>')
+            .replace(/\n\n/g, '<br><br>') // Replace double newlines with double line breaks
+            .replace(/\n/g, '<br>') // Then replace remaining single newlines with line breaks
             .replace(/\r/g, '') // Carriage returns are not needed in HTML, remove them
             .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'); // Replace each tab with 4 non-breaking spaces
         message.innerHTML = "Assistant: " + formattedText; // Use innerHTML to parse the HTML tags
