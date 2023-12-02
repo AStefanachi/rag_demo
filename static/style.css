@@ -66,4 +66,7 @@ button:hover {
     background-color: #eee;
     padding: 10px;
     border-radius: 4px;
+    overflow-y: auto; /* Add vertical scrollbar if needed */
+    max-height: 400px; /* Set a maximum height */
+    white-space: pre-wrap; /* Ensures that text formatting is preserved */
 }

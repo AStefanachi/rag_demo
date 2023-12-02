@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            document.getElementById('response').textContent = JSON.stringify(data);
+            // Assuming data is an object or array, format it as a JSON string
+            document.getElementById('response').textContent = JSON.stringify(data, null, 2);
         });
     });
 
