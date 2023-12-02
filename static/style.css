@@ -45,6 +45,23 @@ button:hover {
     background-color: #4cae4c;
 }
 
+/* Progress Bar Styles */
+#progress-bar-container {
+    width: 100%;
+    background-color: #ddd;
+    margin-bottom: 10px;
+}
+
+#progress-bar {
+    width: 0%;
+    height: 20px;
+    background-color: #5cb85c;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+    transition: width 0.4s ease-in-out;
+}
+
 #response {
     background-color: #eee;
     padding: 10px;
