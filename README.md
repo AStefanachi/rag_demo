@@ -8,7 +8,8 @@ Welcome to the future of information retrieval and interaction! Our RAG Demo App
 
 ## Author
 
-Andrea Stefanachi <andrea@stefanachi.com>
+Andrea Stefanachi - <andrea@stefanachi.com> - [@andreastefanachi](https://www.linkedin.com/in/andreastefanachi/) - [@blog](https://stefanachi.com/about-me)
+
 
 ## Installation
 
