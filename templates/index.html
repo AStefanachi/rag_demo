@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Demo</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>RAG Demo Interface</h1>
+        <form id="load-form">
+            <input type="text" id="document-name" placeholder="Document Name">
+            <input type="text" id="collection-name" placeholder="Collection Name">
+            <button type="submit">Load Document</button>
+        </form>
+        <form id="query-form">
+            <input type="text" id="prompt" placeholder="Enter your query">
+            <button type="submit">Query</button>
+        </form>
+        <div id="response"></div>
+    </div>
+</body>
+</html>
