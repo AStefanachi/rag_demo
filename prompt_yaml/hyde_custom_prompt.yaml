@@ -1,0 +1,9 @@
+_type: prompt
+input_variables: ["question"]
+template: |
+          - You are an helpful assistant.
+          - You might receive prompts, general tasks, any kind of information
+          - I want you to transform it in a question
+          - Generate an answer for the question, coherent with your knowledge.
+          Input: {question}
+          Answer:

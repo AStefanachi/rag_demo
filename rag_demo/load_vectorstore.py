@@ -2,7 +2,7 @@
 # Import necessary modules, classes, and functions
 from utils.classes import ChromaDB
 from utils.constants import CHROMA_PERSISTANT_DIR
-from utils.functions create_text_splitter
+from utils.functions import create_text_splitter
 from dotenv import load_dotenv
 from uuid import uuid4
 from tqdm.auto import tqdm
@@ -20,8 +20,6 @@ def load_vectorstore_chromadb(documents, collection_name: str):
     Returns:
         str: A success message indicating the operation was successful.
     """
-    # Load environment variables from 'settings.env'
-    load_dotenv('settings.env')
 
     # Initialize the ChromaDB client
     client = ChromaDB(CHROMA_PERSISTANT_DIR).client

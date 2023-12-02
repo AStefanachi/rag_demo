@@ -5,6 +5,8 @@ This module provides a class for loading and processing PDF documents.
 
 from langchain.document_loaders import PyPDFLoader
 import chromadb
+from functools import partial
+import traceback
 
 
 class PDFLoader:
@@ -50,14 +52,62 @@ class ChromaDB:
         client (PersistentClient): A client instance for database operations.
     """
 
-    def __init__(self, collection_name, home_dir):
+    def __init__(self, home_dir):
         """
         Initializes a new instance of the ChromaDB class.
 
         Args:
-            collection_name (str): The name of the collection in ChromaDB.
             home_dir (str): The home directory where ChromaDB data is stored.
         """
-        self.collection_name = collection_name
         self.home_dir = home_dir
         self.client = chromadb.PersistentClient(path=home_dir)
+
+
+class Orchestrator:
+    """
+    Manages and executes a sequence of functions sequentially.
+
+    Functions are loaded with their arguments, and when run, each function's output
+    is passed as input to the next function in the sequence.
+    """
+    
+    def __init__(self):
+        """Initializes the Orchestrator with an empty list to store functions."""
+        self.functions = []
+    
+    def load_function(self, function, *args, **kwargs):
+        """Loads a function into the orchestrator with its arguments.
+
+        Args:
+            function: The function to be loaded into the orchestrator.
+            args: Positional arguments to be passed to the function.
+            kwargs: Keyword arguments to be passed to the function.
+        """
+        self.functions.append(partial(function, *args, **kwargs))
+        
+    def run(self):
+        # Runner function to execute each loaded function, passing the result of the
+        # previous function as its argument.
+        def runner(func, previous_result):
+            # Pass the previous result into the function if it exists; otherwise, call without arguments.
+            result = func(previous_result) if previous_result is not None else func()
+            # Yield the function's result back to the caller
+            yield result
+            # Return the result to be used as input for the next function
+            return result
+
+        # Initialize the result variable to None
+        result = None
+        try:
+            # Execute each loaded function sequentially
+            for function in self.functions:
+                # Obtain a generator from the runner function
+                result_generator = runner(function, result)
+                # Retrieve the result from the generator and update the result variable
+                result = next(result_generator)
+        except Exception as e:
+            # Yield an error message and stop execution if an exception occurs
+            yield f"Error: {e}\n{traceback.format_exc()}"
+            return
+        # Yield a final message indicating completion and the final result after all functions are executed
+        yield result
