@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('query-form').addEventListener('submit', function(e) {
         e.preventDefault();
         var prompt = document.getElementById('prompt').value;
+        appendUserMessage(prompt); // Append the user's message to the chat
         startProgressBar();
         fetch('/query', {
             method: 'POST',
@@ -45,14 +46,26 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            const chatInterface = document.getElementById('chat-interface');
-            const message = document.createElement('div');
-            message.classList.add('chat-message', 'system-message');
-            message.textContent = JSON.stringify(data, null, 2);
-            chatInterface.appendChild(message);
-            chatInterface.scrollTop = chatInterface.scrollHeight; // Scroll to the bottom
+            appendSystemMessage(JSON.stringify(data, null, 2)); // Append the system's response to the chat
         });
     });
+
+    function appendUserMessage(text) {
+        const chatInterface = document.getElementById('chat-interface');
+        const message = document.createElement('div');
+        message.classList.add('chat-message', 'user-message');
+        message.textContent = "User: " + text;
+        chatInterface.appendChild(message);
+    }
+
+    function appendSystemMessage(text) {
+        const chatInterface = document.getElementById('chat-interface');
+        const message = document.createElement('div');
+        message.classList.add('chat-message', 'system-message');
+        message.textContent = "Assistant: " + text;
+        chatInterface.appendChild(message);
+        chatInterface.scrollTop = chatInterface.scrollHeight; // Scroll to the bottom
+    }
 });
 
 function startProgressBar() {
