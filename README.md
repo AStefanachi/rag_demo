@@ -11,9 +11,10 @@ Andrea Stefanachi <andrea@stefanachi.com>
 Before installing the necessary dependencies, you need to create a `settings.env` file in the project root with the following contents as an example:
 
 ```env
-FLASK_APP=app.py
+FLASK_APP=main.py
 FLASK_ENV=development
-CHROMADB_URI=mongodb://localhost:27017/mydatabase
+LLM_MODEL=gpt-3.5-turbo-1106
+OPENAI_API_KEY=YOUROPENAIAPIKEY
 ```
 
 Additionally, create a folder to store your ChromaDB persistent client data.
