@@ -14,10 +14,12 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         var documentName = document.getElementById('document-name').value;
         startProgressBar();
+        var collectionNameLoad = document.getElementById('collection-name-load').value;
         fetch('/load_vectorstore', {
             method: 'POST',
             body: new URLSearchParams({
-                'document_name': documentName
+                'document_name': documentName,
+                'collection_name': collectionNameLoad
             })
         })
         .finally(() => {
@@ -35,10 +37,12 @@ document.addEventListener('DOMContentLoaded', function() {
         var prompt = document.getElementById('prompt').value;
         appendUserMessage(prompt); // Append the user's message to the chat
         startProgressBar();
+        var collectionNameQuery = document.getElementById('collection-name-query').value;
         fetch('/query', {
             method: 'POST',
             body: new URLSearchParams({
-                'prompt': prompt
+                'prompt': prompt,
+                'collection_name': collectionNameQuery
             })
         })
         .finally(() => {
