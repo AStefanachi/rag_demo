@@ -63,10 +63,30 @@ button:hover {
 }
 
 #response {
-    background-color: #eee;
+    display: none; /* Hide the raw response container */
+}
+
+/* Chat message styles */
+.chat-message {
     padding: 10px;
-    border-radius: 4px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    max-width: 80%;
+}
+
+.user-message {
+    background-color: #dcf8c6; /* Light green background for user messages */
+    align-self: flex-end; /* Align to the right */
+}
+
+.system-message {
+    background-color: #ebebeb; /* Light grey background for system messages */
+    align-self: flex-start; /* Align to the left */
+}
+
+#chat-interface {
+    display: flex;
+    flex-direction: column;
     overflow-y: auto; /* Add vertical scrollbar if needed */
     max-height: 400px; /* Set a maximum height */
-    white-space: pre-wrap; /* Ensures that text formatting is preserved */
 }
