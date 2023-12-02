@@ -1,8 +1,8 @@
-# RAG Demo Application
+# RAG Demo Application - Chat with Your Own Data
 
 ![Alt text](demo.png?raw=true "Demo")
 
-This application demonstrates the capabilities of a Retrieval-Augmented Generation (RAG) system using Flask for the web backend and ChromaDB for document storage and retrieval.
+Welcome to the future of information retrieval and interaction! Our RAG Demo Application lets you seamlessly integrate your own data into the conversational flow, enabling you to chat with your documents as if they were a knowledgeable friend. Powered by a state-of-the-art Retrieval-Augmented Generation (RAG) system, this application uses Flask for the web backend and ChromaDB for efficient document storage and retrieval. Dive into a personalized chat experience where your own PDFs become part of the dialogue, enriching each conversation with precise, contextually relevant information.
 
 ## Author
 
