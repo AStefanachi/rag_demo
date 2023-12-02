@@ -4,6 +4,7 @@ This module provides a class for loading and processing PDF documents.
 """
 
 from langchain.document_loaders import PyPDFLoader
+import chromadb
 
 
 class PDFLoader:
@@ -34,14 +35,11 @@ class PDFLoader:
         """
         self.loader = PyPDFLoader(self.path)
         return self.loader.load_and_split()
-class ChromaDBLoader:
-    """
-    A class to handle the loading of data into ChromaDB.
 
-    Attributes:
-        collection_name (str): The name of the collection in ChromaDB.
-        home_dir (str): The home directory where ChromaDB data is stored.
-        client (chromadb.PersistentClient): The ChromaDB client instance.
+
+class ChromaDB:
+    """
+    Write some proper documentation here
     """
 
     def __init__(self, collection_name, home_dir):
@@ -54,23 +52,5 @@ class ChromaDBLoader:
         """
         self.collection_name = collection_name
         self.home_dir = home_dir
-        self.client = None
-
-    def load_data(self, data_list):
-        """
-        Loads data into the specified ChromaDB collection.
-
-        Args:
-            data_list (list): A list of data to be loaded into ChromaDB.
-
-        Returns:
-            bool: True if the data was loaded successfully, False otherwise.
-        """
-        # The logic for loading data into ChromaDB will be implemented here.
-        # This will include the code from utils\example.txt that handles the
-        # ChromaDB loading process, adapted to use the class attributes and
-        # parameters.
-        pass  # Placeholder for the actual implementation.
-
-# Add the rest of the code from utils\example.txt that is relevant to the
-# ChromaDB loading process, adapted to fit within the ChromaDBLoader class.
+        self.client = chromadb.PersistentClient(path=home_dir)
+        return self.client
