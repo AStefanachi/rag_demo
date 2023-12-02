@@ -19,7 +19,7 @@ LLM_MODEL=gpt-3.5-turbo-1106
 OPENAI_API_KEY=YOUROPENAIAPIKEY
 ```
 
-Additionally, create a folder to store your ChromaDB persistent client data.
+Additionally, create a folder to store your ChromaDB persistent client data. Also, create a folder called `sample_source/pdf` where you will put the PDFs that you want to load into the vector store. Each time you load a document, you need to specify its own collection name. Use the same collection name when you query it in the chat.
 
 Note: The `OPENAI_API_KEY` is not free and can be obtained from [OpenAI's website](https://openai.com/blog/openai-api).
 
