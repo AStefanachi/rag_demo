@@ -1,5 +1,7 @@
 # RAG Demo Application
 
+![Alt text](demo.png?raw=true "Demo")
+
 This application demonstrates the capabilities of a Retrieval-Augmented Generation (RAG) system using Flask for the web backend and ChromaDB for document storage and retrieval.
 
 ## Author
