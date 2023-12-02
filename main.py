@@ -1,9 +1,4 @@
-# from rag_demo.orchestration import load_chromadb
-from utils.classes import ChromaDB
-from utils.constants import CHROMA_PERSISTANT_DIR
-
-# print(load_chromadb(document_name="DR_EUS_MFL70442678_00_221121_00_WEB_EN.pdf", collection_name="LG_DRYER_DEMO"))
-
-from rag_demo.retrievals import query_tech_news_feed_chromadb
-
-print(query_tech_news_feed_chromadb("What is the brand of this object?"))
+# I want you to create a main function
+# The main function will have two options that should be used via argparse: load_vectorstore or query
+# load_vectorstore will require all the arguments needed from ´rag_demo\load_chromadb.py´ for the function load_cromadb
+# query will require all the arguments needed from ´rag_demo\retrievals.py´ for the function query_LG_DRYER_DEMO
