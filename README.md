@@ -8,6 +8,16 @@ Andrea Stefanachi <andrea@stefanachi.com>
 
 ## Installation
 
+Before installing the necessary dependencies, you need to create a `settings.env` file in the project root with the following contents as an example:
+
+```env
+FLASK_APP=app.py
+FLASK_ENV=development
+CHROMADB_URI=mongodb://localhost:27017/mydatabase
+```
+
+Additionally, create a folder to store your ChromaDB persistent client data.
+
 To install the necessary dependencies for this application, run the following command:
 
 ```bash
