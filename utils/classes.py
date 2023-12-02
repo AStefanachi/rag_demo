@@ -39,12 +39,20 @@ class PDFLoader:
 
 class ChromaDB:
     """
-    Write some proper documentation here
+    ChromaDB is a class for interacting with a ChromaDB database.
+
+    It provides an interface to connect to a ChromaDB collection and perform
+    operations such as querying and updating records.
+
+    Attributes:
+        collection_name (str): The name of the collection in ChromaDB.
+        home_dir (str): The home directory where ChromaDB data is stored.
+        client (PersistentClient): A client instance for database operations.
     """
 
     def __init__(self, collection_name, home_dir):
         """
-        Initializes the ChromaDBLoader with the given collection name and home directory.
+        Initializes a new instance of the ChromaDB class.
 
         Args:
             collection_name (str): The name of the collection in ChromaDB.
@@ -53,4 +61,3 @@ class ChromaDB:
         self.collection_name = collection_name
         self.home_dir = home_dir
         self.client = chromadb.PersistentClient(path=home_dir)
-        return self.client
