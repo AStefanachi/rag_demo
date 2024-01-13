@@ -1,7 +1,11 @@
 import os
+import os
+from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify
 from rag_demo.orchestration import load_chromadb
 from rag_demo.retrievals import query_LG_DRYER_DEMO
+
+load_dotenv('settings.env')
 
 app = Flask(__name__)
 
