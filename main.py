@@ -37,8 +37,5 @@ def query():
     result = query_LG_DRYER_DEMO(prompt, collection_name)
     return jsonify(result)
 
-import os
-
 if __name__ == '__main__':
-    os.environ['FLASK_APP'] = 'main.py'
     app.run(debug=True)
