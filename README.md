@@ -31,8 +31,6 @@ Andrea Stefanachi - <andrea@stefanachi.com> - [@andreastefanachi](https://www.li
 Before installing the necessary dependencies, you need to create a `settings.env` file in the project root with the following contents as an example:
 
 ```env
-FLASK_APP=main.py
-FLASK_ENV=development
 LLM_MODEL=gpt-3.5-turbo-1106
 OPENAI_API_KEY=YOUROPENAIAPIKEY
 ```
@@ -54,7 +52,7 @@ Make sure you have Poetry installed on your system. If not, you can install it b
 To run the application, use the following command:
 
 ```bash
-flask run
+flask --app main.py run
 ```
 
 Navigate to `http://127.0.0.1:5000/` in your web browser to access the application.
