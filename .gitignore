@@ -1,4 +1,6 @@
 .aider*
-sample_sources/pdf
+sample_sources/pdf/*
+!sample_sources/pdf/.gitkeep
 chromadb/
 settings.env
+.idea/*
